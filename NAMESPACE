@@ -1,1 +1,3 @@
-@import tm, magrittr, qdap
+import(tm)
+import(magrittr)
+import(qdap)
