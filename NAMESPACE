@@ -1,4 +1,5 @@
 import(tm)
+import(rJava)
 import(qdap)
 export(orion_prep)
 export(orion_search)
