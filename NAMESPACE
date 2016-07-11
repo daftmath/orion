@@ -1,5 +1,2 @@
 exportPattern("^[[:alpha:]]+")
-import
-  tm,
-  magrittr,
-  qdap
+import tm, magrittr, qdap
