@@ -1,4 +1,4 @@
 import(tm)
-import(qdap)
+importFrom(qdap, synonyms)
 export(orion_prep)
 export(orion_search)
