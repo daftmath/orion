@@ -2,8 +2,7 @@ Package: orion
 Type: Package
 Title: Orion - Search Engine for R dataframes
 Version: 0.1.0
-Author: Cody Bryant
-Maintainer: person("Cody", "Bryant", , "daftmath@gmail.com", role = c("aut", "cre"))
+Authors@R: person("Cody", "Bryant", "daftmath@gmail.com", role = c("aut", "cre"))
 Description: This package will take a seach query as input and score a vector of text items to determine relevancy to the search query.
 License: GPLv3
 LazyData: TRUE
