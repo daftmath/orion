@@ -5,7 +5,7 @@ Version: 0.1.0
 Authors@R: person("Cody", "Bryant", email="daftmath@gmail.com", role = c("aut", "cre"))
 Description: This package will take a seach query as input and score a vector of text items to determine relevancy to the search query.
 License: GPLv3
-LazyData: FALSE
+LazyData: true
 Imports:
-  tm,
-  qdap
+  tm
+
