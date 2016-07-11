@@ -8,5 +8,4 @@ License: GPLv3
 LazyData: true
 Imports:
   qdap,
-  rJava,
   tm
