@@ -1,24 +1,7 @@
-library(magrittr)
-load("opspro_data2.r")
 
-# R Search Engine
+# R Dataframe Search Engine
 
-idf_weight <- function(tf_vec, df) {
-  # Computes tfidf weights from a term frequency vector and a document frequency scalar
-  weight = rep(0, length(tf_vec))
-  weight[tf_vec > 0] = (1 + log2(tf_vec[tf_vec > 0])) * log2(doc_count/df)
-  weight
-}
-
-term_weight <- function(idf_row) {
-  term_df <- sum(idf_row[1:doc_count] > 0)
-  tfidv_vec <- idf_weight(idf_row, term_df)
-  return(tfidv_vec)
-}
-
-
-
-
+# Creates a tf-idf matrix to prepare for searching.
 orion_prep <- function(docs) {
 
   # Stemming, removing punctuation, white spaces to improve matching ability
@@ -38,19 +21,22 @@ orion_prep <- function(docs) {
 }
 
 
+# Search Engine
+orion <- function(tdm, search_q, print_q=FALSE) {
 
-
-orion <- function(tdm, search_q) {
-
-  #search_q <- "bogan arm"
+  # Preparing the search query
   search_q2 <- unlist(strsplit(search_q, split=" "))
 
+  # Locating synonyms
   for (i in 1:length(search_q2)) {
     search_q3 <- append(search_q2, synonyms(search_q2[i], return.list = FALSE))
   }
   search_q4 <- unlist(strsplit(search_q3, split=" "))
-  # Pasting original search term to give it double weight
-  search_q5 <- paste(search_q, paste(search_q3, collapse = " "))
+  search_q5 <- paste(search_q3, collapse = " ")
+
+  if(print_q==TRUE) {
+    print(search_q5)
+  }
 
   query_clean <- VectorSource(search_q5) %>%
     Corpus() %>%
@@ -62,20 +48,21 @@ orion <- function(tdm, search_q) {
 
   search_q6 <-  tm_map(query_clean, PlainTextDocument) %>% TermDocumentMatrix() %>% as.matrix()
 
+  # Creating vector to compare against weighted tdm.
   query_vec <- rep(0, NROW(tdm))
-  query_vec[which(row.names(tdm) %in% search_q)] <- 1
+  query_vec[which(row.names(tdm) %in% row.names(search_q6))] <- 1
   query_vec[which(row.names(tdm) %in% search_q2)] <- 2
 
   tdm <- scale(tdm, center = FALSE, scale = sqrt(colSums(tdm^2)))
 
 
-  scores <- crossprod(tdm, query_vec)
+  scores <- as.numeric(crossprod(tdm, query_vec))
   return(scores)
 
 }
 
 
-orion_time_test <- function(n) {
+orion_time_test <- function(n, sp_test) {
   lst = list()
   for (i in 1:n) {
     ptm <- proc.time()
