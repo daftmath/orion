@@ -10,7 +10,3 @@ Imports:
   tm,
   magrittr,
   qdap
-@import:
-  tm,
-  magrittr,
-  qdap
