@@ -1,9 +1,9 @@
 Package: orion
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Orion - Search Engine for R dataframes
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Cody Bryant
+Maintainer: daftmath@gmail.com
+Description: This package will take a string input and score the vector items to determine relevancy to the search query. It uses a vector space model in conjection with term frequency-inverse document frequency and thesaurus/synonym lookup to determine the relevant items.
+License: GPLv3
 LazyData: TRUE
