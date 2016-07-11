@@ -7,5 +7,5 @@ Description: This package will take a seach query as input and score a vector of
 License: GPLv3
 LazyData: true
 Imports:
+  qdap,
   tm
-
